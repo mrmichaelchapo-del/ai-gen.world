@@ -1,22 +1,96 @@
 <!DOCTYPE html>
-  <html lang="en">
-   <head>
-    <meta charset="UTF-8">
-    <title>ai-gen.world</title>
-     
-     <style>
-  a {
-    background: linear-gradient(yellow, blue);
-  }
-</style>
-   </head>
-    <body>
-       <h1>🤖 AI Sprunki Sentence Generator</h1>
-<input type="text" placeholder="Prompt here!">
-      <button>Generate 🤖</button>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>ai-gen.world</title>
+  <style>
+    body {
+      font-family: system-ui, sans-serif;
+      max-width: 600px;
+      margin: 40px auto;
+      padding: 0 16px;
+    }
 
-     <footer>
-      <a href="https://GitHub.com/mrmichaelchapo-del/ai-gen.world">Source Code</a>
-      </footer>
-    </body>
+    input {
+      padding: 8px;
+      width: 60%;
+      font-size: 1rem;
+    }
+
+    button {
+      padding: 8px 14px;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+
+    #output {
+      margin-top: 20px;
+      padding: 12px;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      min-height: 1.5em;
+      background: #fafafa;
+    }
+
+    footer {
+      margin-top: 40px;
+      font-size: 0.9rem;
+    }
+
+    a {
+      background: linear-gradient(yellow, blue);
+      padding: 2px 6px;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body>
+  <h1>🤖 AI Sprunki Sentence Generator</h1>
+
+  <input id="prompt" type="text" placeholder="Prompt here!">
+  <button id="generate">Generate 🤖</button>
+
+  <div id="output"></div>
+
+  <footer>
+    <a href="https://github.com/mrmichaelchapo-del/ai-gen.world">Source Code</a>
+  </footer>
+
+  <script>
+    const promptInput = document.getElementById('prompt');
+    const output = document.getElementById('output');
+    const button = document.getElementById('generate');
+
+    // Templates: {x} gets replaced by the user's prompt
+    const templates = [
+      "Fix this, {x}!",
+      "Do not release {x} on Scratch!",
+      "{x} is too adult",
+      "Ban {x} forever.",
+      "The {x} players is playing too rough!",
+      "{x} needs to be banned!",
+      "Parents need better!",
+      "Keep {x} TV-MA!",
+      "Ban {x}!",
+      "Start a protest against {x}!"
+    ];
+
+    function generateSentence(prompt) {
+      const word = prompt.trim() || "Sprunki";
+      const template = templates[Math.floor(Math.random() * templates.length)];
+      return template.replace("{x}", word);
+    }
+
+    function handleGenerate() {
+      output.textContent = generateSentence(promptInput.value);
+    }
+
+    button.addEventListener('click', handleGenerate);
+
+    // Also generate on Enter key
+    promptInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') handleGenerate();
+    });
+  </script>
+</body>
 </html>
